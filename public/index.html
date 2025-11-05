@@ -96,16 +96,29 @@
   </div>
 
   <script>
-    document.getElementById("sendBtn").addEventListener("click", function() {
-      const number = document.getElementById("number").value.trim();
-      const option = document.getElementById("option").value;
-      const message = document.getElementById("customMessage").value.trim();
-      if (!number) return alert("Please enter your phone number.");
-      if (!message) return alert("Please paste or type your message.");
-      const subject = encodeURIComponent("WhatsApp Unban Request - " + option);
-      const body = encodeURIComponent(message.replace("{number}", number));
-      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=support@whatsapp.com&su=${subject}&body=${body}`, "_blank");
-    });
-  </script>
+document.getElementById("sendBtn").addEventListener("click", function() {
+  const number = document.getElementById("number").value.trim();
+  const option = document.getElementById("option").value;
+  const message = document.getElementById("customMessage").value.trim();
+
+  if (!number) return alert("Please enter your phone number.");
+  if (!message) return alert("Please paste or type your message.");
+
+  const subject = encodeURIComponent("WhatsApp Unban Request - " + option);
+  const body = encodeURIComponent(message.replace("{number}", number));
+
+  // Detekte si se mobil oswa desktop
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // Si se mobil: ouvri app mail natif
+  if (isMobile) {
+    window.location.href = `mailto:support@whatsapp.com?subject=${subject}&body=${body}`;
+  } 
+  // Sinon sou PC: ouvri Gmail
+  else {
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=support@whatsapp.com&su=${subject}&body=${body}`, "_blank");
+  }
+});
+</script>
 </body>
 </html>
