@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>WhatsApp Unban Tool</title>
+  <style>
+    :root {
+      --bg1:#000;
+      --bg2:#001a0b;
+      --accent1:#00ff55;
+      --accent2:#00ffaa;
+      --text:#e6eef8;
+      --muted:#a1b0a5;
+      --font:"Courier New",monospace;
+    }
+    @keyframes hueShift { 0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);} }
+    @keyframes pulse {0%,100%{box-shadow:0 0 10px var(--accent1),0 0 30px var(--accent2);}50%{box-shadow:0 0 25px var(--accent2),0 0 60px var(--accent1);}}
+    body {
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      animation:hueShift 15s linear infinite;
+      color:var(--text);font-family:var(--font);
+      display:flex;justify-content:center;align-items:center;min-height:100vh;
+    }
+    .card {
+      background:rgba(0,255,85,0.03);
+      border:1px solid rgba(0,255,85,0.3);
+      border-radius:14px;
+      padding:35px;width:380px;text-align:center;
+      backdrop-filter:blur(6px);animation:pulse 6s ease-in-out infinite;
+    }
+    .photo-box {
+      width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 25px;
+      border:2px solid rgba(0,255,85,0.6);box-shadow:0 0 25px rgba(0,255,85,0.3);
+    }
+    .photo-box img {width:100%;height:100%;object-fit:cover;filter:brightness(1.2);}
+    h1 {color:var(--accent1);font-size:22px;margin-bottom:25px;text-shadow:0 0 10px rgba(0,255,85,0.6);}
+    label {display:block;text-align:left;margin:12px 0 6px;color:var(--accent2);font-size:14px;}
+    select, input, textarea {
+      width:100%;padding:12px;border-radius:8px;background:rgba(255,255,255,0.03);
+      color:var(--text);border:1px solid rgba(0,255,85,0.3);outline:none;font-family:var(--font);
+    }
+    textarea {min-height:80px;resize:none;}
+    select:focus, input:focus, textarea:focus {
+      border-color:var(--accent1);box-shadow:0 0 10px rgba(0,255,85,0.5);
+    }
+    button {
+      width:100%;margin-top:20px;padding:14px;border-radius:8px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      border:none;color:#000;font-weight:bold;cursor:pointer;font-family:var(--font);
+      transition:all 0.3s ease;
+    }
+    button:hover {
+      background:linear-gradient(90deg,var(--accent2),var(--accent1));
+      box-shadow:0 0 20px rgba(0,255,85,0.5);transform:scale(1.05);
+    }
+    .join-channel {margin-top:25px;padding-top:15px;border-top:1px solid rgba(0,255,85,0.2);}
+    .join-channel p {color:var(--muted);font-size:13px;margin-bottom:10px;}
+    .join-btn {
+      display:inline-block;padding:10px 25px;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#000;font-weight:bold;text-decoration:none;border-radius:6px;box-shadow:0 0 10px rgba(0,255,85,0.3);
+      transition:all 0.3s ease;
+    }
+    .join-btn:hover {box-shadow:0 0 20px rgba(0,255,85,0.5);transform:scale(1.05);}
+    footer {margin-top:25px;font-size:12px;color:var(--muted);text-shadow:0 0 5px rgba(0,255,85,0.2);}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="photo-box"><img src="https://files.catbox.moe/ijo0fe.png" alt="Avatar"></div>
+    <h1>WHATSAPP UNBAN BY DAWENS</h1>
 
+    <label>UNBAN OPTION</label>
+    <select id="option">
+      <option>Permanent Unbanned</option>
+      <option>Temporary Review Request</option>
+      <option>Appeal for Mistaken Ban</option>
+    </select>
+
+    <label>YOUR NUMBER</label>
+    <input id="number" type="tel" placeholder="+923001234567" />
+
+    <label>MESSAGE (from unban.html)</label>
+    <textarea id="customMessage" placeholder="Paste your copied unban message here..."></textarea>
+
+    <button id="sendBtn">SEND UNBAN REQUEST</button>
+    <button onclick="window.open('unban.html','_blank')" style="margin-top:10px;">OPEN MESSAGE UNBAN LIST</button>
+
+    <div class="join-channel">
+      <p>Join our WhatsApp Channel for updates 👇</p>
+      <a href="https://whatsapp.com/channel/YOUR-CHANNEL-LINK" target="_blank" class="join-btn">Join WhatsApp Channel</a>
+    </div>
+
+    <audio src="https://files.catbox.moe/634q9l.mp4" autoplay loop></audio>
+    <footer>© 2025 | Developed by GOD-DAWENS</footer>
+  </div>
+
+  <script>
+    document.getElementById("sendBtn").addEventListener("click", function() {
+      const number = document.getElementById("number").value.trim();
+      const option = document.getElementById("option").value;
+      const message = document.getElementById("customMessage").value.trim();
+      if (!number) return alert("Please enter your phone number.");
+      if (!message) return alert("Please paste or type your message.");
+      const subject = encodeURIComponent("WhatsApp Unban Request - " + option);
+      const body = encodeURIComponent(message.replace("{number}", number));
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=support@whatsapp.com&su=${subject}&body=${body}`, "_blank");
+    });
+  </script>
+</body>
+</html>
