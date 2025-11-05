@@ -1,0 +1,12 @@
+{
+  "name": "whatsapp-unban-tool",
+  "version": "1.0.0",
+  "description": "WhatsApp Unban Tool - Static Website",
+  "scripts": {
+    "start": "serve public"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  },
+  "license": "MIT"
+}
