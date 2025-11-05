@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Unban Message List</title>
+<style>
+  body {
+    background:#001308;
+    color:#00ffaa;
+    font-family:"Courier New",monospace;
+    display:flex;flex-direction:column;align-items:center;
+    padding:40px 10px;
+  }
+  h1 {color:#00ff77;text-shadow:0 0 10px #00ff77;}
+  .msg-box {
+    background:rgba(0,255,85,0.05);
+    border:1px solid rgba(0,255,85,0.3);
+    border-radius:10px;
+    padding:15px;
+    margin:10px 0;
+    width:90%;
+    max-width:600px;
+    position:relative;
+  }
+  .copy-btn {
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    background:linear-gradient(90deg,#00ff55,#00ffaa);
+    color:#000;
+    border:none;
+    border-radius:6px;
+    padding:6px 14px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+  }
+  .copy-btn:hover {transform:scale(1.05);}
+  .back-btn {
+    margin-top:25px;
+    padding:10px 25px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(90deg,#00ff55,#00ffaa);
+    color:#000;font-weight:bold;cursor:pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>20 UNBAN MESSAGE TEMPLATES</h1>
+
+  <div id="messages"></div>
+  <button class="back-btn" onclick="window.location.href='index.html'">← Back to Main Page</button>
+
+  <script>
+    const messages = [
+      "Hello WhatsApp Team, Please review my banned number {number} and restore access. Thank you.",
+      "Dear Support, my account {number} was banned. Kindly check and unban.",
+      "My number {number} got banned mistakenly. Please review and restore.",
+      "Respected WhatsApp Team, I appeal to unban {number}.",
+      "Hello, I was wrongly banned on {number}. Please check again.",
+      "My WhatsApp number {number} was disabled. I request a reactivation.",
+      "Please unban my account {number}. It’s urgent.",
+      "Apologies for the issue, kindly unban my number {number}.",
+      "Please recheck ban decision for {number}.",
+      "I request a full review for number {number}.",
+      "Support Team, please restore my banned WhatsApp {number}.",
+      "This is a final request to unban {number}.",
+      "I am using {number}, please remove the ban. Thank you.",
+      "I appeal to review my ban for number {number}.",
+      "Kindly unban my WhatsApp number {number}.",
+      "Please verify and re-enable my number {number}.",
+      "I’m unable to access WhatsApp on {number}, please restore it.",
+      "Please check again, number {number} is wrongly banned.",
+      "Need your help to unban {number}.",
+      "This is a request to lift ban for {number}. Thank you."
+    ];
+
+    const container = document.getElementById("messages");
+    messages.forEach(msg => {
+      const box = document.createElement("div");
+      box.className = "msg-box";
+      box.innerHTML = `<p>${msg}</p><button class="copy-btn">Copy</button>`;
+      box.querySelector(".copy-btn").addEventListener("click", () => {
+        navigator.clipboard.writeText(msg);
+        box.querySelector(".copy-btn").textContent = "Copied!";
+        setTimeout(() => box.querySelector(".copy-btn").textContent = "Copy", 2000);
+      });
+      container.appendChild(box);
+    });
+  </script>
+</body>
+</html>
