@@ -95,30 +95,43 @@
     <footer>© 2025 | Developed by GOD-DAWENS</footer>
   </div>
 
-  <script>
-document.getElementById("sendBtn").addEventListener("click", function() {
-  const number = document.getElementById("number").value.trim();
-  const option = document.getElementById("option").value;
-  const message = document.getElementById("customMessage").value.trim();
+  <script type="module">
+// TypeScript-like code
+type Nullable<T> = T | null;
 
-  if (!number) return alert("Please enter your phone number.");
-  if (!message) return alert("Please paste or type your message.");
+const sendBtn: Nullable<HTMLButtonElement> = document.getElementById("sendBtn") as Nullable<HTMLButtonElement>;
+const openListBtn: Nullable<HTMLButtonElement> = document.getElementById("openListBtn") as Nullable<HTMLButtonElement>;
+const numberInput: Nullable<HTMLInputElement> = document.getElementById("number") as Nullable<HTMLInputElement>;
+const optionSelect: Nullable<HTMLSelectElement> = document.getElementById("option") as Nullable<HTMLSelectElement>;
+const messageTextarea: Nullable<HTMLTextAreaElement> = document.getElementById("customMessage") as Nullable<HTMLTextAreaElement>;
 
-  const subject = encodeURIComponent("WhatsApp Unban Request - " + option);
-  const body = encodeURIComponent(message.replace("{number}", number));
+if (sendBtn && numberInput && optionSelect && messageTextarea) {
+  sendBtn.addEventListener("click", () => {
+    const number: string = numberInput.value.trim();
+    const option: string = optionSelect.value;
+    const message: string = messageTextarea.value.trim();
 
-  // Detekte si se mobil oswa desktop
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (!number) { alert("Please enter your phone number."); return; }
+    if (!message) { alert("Please paste or type your message."); return; }
 
-  // Si se mobil: ouvri app mail natif
-  if (isMobile) {
-    window.location.href = `mailto:support@whatsapp.com?subject=${subject}&body=${body}`;
-  } 
-  // Sinon sou PC: ouvri Gmail
-  else {
-    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=support@whatsapp.com&su=${subject}&body=${body}`, "_blank");
-  }
-});
+    const subject: string = encodeURIComponent(`WhatsApp Unban Request - ${option}`);
+    const body: string = encodeURIComponent(message.replace("{number}", number));
+
+    const isMobile: boolean = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      window.location.href = `mailto:support@whatsapp.com?subject=${subject}&body=${body}`;
+    } else {
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=support@whatsapp.com&su=${subject}&body=${body}`, "_blank");
+    }
+  });
+}
+
+if (openListBtn) {
+  openListBtn.addEventListener("click", () => {
+    window.open('unban.html', '_blank');
+  });
+}
 </script>
 </body>
 </html>
