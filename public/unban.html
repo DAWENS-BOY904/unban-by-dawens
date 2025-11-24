@@ -53,8 +53,10 @@
   <div id="messages"></div>
   <button class="back-btn" onclick="window.location.href='index.html'">← Back to Main Page</button>
 
-  <script>
-    const messages = [
+  <script type="module">
+type Nullable<T> = T | null;
+
+const messages: string[] = [
       "Hello WhatsApp Team, Please review my banned number {number} and restore access. Thank you.",
       "Dear Support, my account {number} was banned. Kindly check and unban.",
       "My number {number} got banned mistakenly. Please review and restore.",
@@ -140,18 +142,27 @@
       "This is a request to lift ban for {number}. Thank you."
     ];
 
-    const container = document.getElementById("messages");
-    messages.forEach(msg => {
-      const box = document.createElement("div");
-      box.className = "msg-box";
-      box.innerHTML = `<p>${msg}</p><button class="copy-btn">Copy</button>`;
-      box.querySelector(".copy-btn").addEventListener("click", () => {
-        navigator.clipboard.writeText(msg);
-        box.querySelector(".copy-btn").textContent = "Copied!";
-        setTimeout(() => box.querySelector(".copy-btn").textContent = "Copy", 2000);
-      });
-      container.appendChild(box);
+    const container: Nullable<HTMLDivElement> = document.getElementById("messages") as Nullable<HTMLDivElement>;
+
+if (container) {
+  messages.forEach(msg => {
+    const box: HTMLDivElement = document.createElement("div");
+    box.className = "msg-box";
+    box.innerHTML = `<p>${msg}</p><button class="copy-btn">Copy</button>`;
+    const btn: Nullable<HTMLButtonElement> = box.querySelector(".copy-btn") as Nullable<HTMLButtonElement>;
+    btn?.addEventListener("click", () => {
+      navigator.clipboard.writeText(msg);
+      if (btn) btn.textContent = "Copied!";
+      setTimeout(() => { if (btn) btn.textContent = "Copy"; }, 2000);
     });
-  </script>
+    container.appendChild(box);
+  });
+}
+
+const backBtn: Nullable<HTMLButtonElement> = document.querySelector(".back-btn");
+backBtn?.addEventListener("click", () => {
+  window.location.href = "index.html";
+});
+</script>
 </body>
 </html>
